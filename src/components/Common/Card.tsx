@@ -2,7 +2,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { AiFillStar } from "react-icons/ai";
 
 const Father = styled.div`
   a {
@@ -16,7 +15,7 @@ const Card = styled.div`
   margin: 0 0 20px 0;
   background: ${(p) => p.theme.colors.white};
   color: ${(p) => p.theme.colors.black};
-  height: 350px;
+  height: 450px;
   width: 280px;
   display: flex;
   flex-direction: column;
@@ -34,8 +33,15 @@ const Img = styled.img`
   border-radius: 8px;
 `;
 
+const Ico = styled.img`
+  position: relative;
+  width: 10px;
+  height: 10px;
+`;
+
 const Content = styled.div`
   height: 140px;
+  margin: 20px 0 10px 0;
   width: 280px;
   padding: 5px;
   display: flex;
@@ -57,29 +63,27 @@ const Content = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  transition: 0.3s;
+  button {
+    display: none;
+  }
+  &: hover {
+    background: #e6e8ea;
+    cursor: pointer;
+    button {
+      display: flex;
+      background: #333;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 4px;
+      border: none;
+    }
+  }
 `;
 
-const Favor = styled.button`
-  height: 40px;
-  width: 50px;
-  transform: translateX(2%);
-  transition: 0.5s transform cubic-bezier(0.5, 0, 0, 1);
-  margin-left: 80%;
-  border: 1px solid ${(p) => p.theme.colors.gold};
-  border-radius: 5px;
-  background-color: ${(p) => p.theme.colors.secondary.main};
-  color: ${(p) => p.theme.colors.gold};
-  &: hover {
-    background: ${(p) => p.theme.colors.secondary.contrastText};
-    color: ${(p) => p.theme.colors.secondary.main};
-    border: 1px solid ${(p) => p.theme.colors.secondary.main};
-    border-radius: 4px;
-    transform: translateX(0);
-    cursor: pointer;
-    -webkit-box-shadow: 0px 0px 7px -3px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 7px -3px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 7px -3px rgba(0, 0, 0, 0.75);
-  }
+const BtnFather = styled.div`
+  margin: 10px 0;
+  height: 30px;
 `;
 
 /*
@@ -88,10 +92,12 @@ const Favor = styled.button`
 interface Props {
   promo: boolean;
   image: string;
+  oldPrice: number;
   description: string;
   id: string;
   search: "roupa" | "sapato";
-  liked: boolean;
+
+  installments: [];
   price: number;
 }
 /*
@@ -101,45 +107,34 @@ interface Props {
 const CardComicsChar: React.FC<Props> = ({
   promo,
   image,
+  oldPrice,
   description,
   id,
   search,
-  liked,
-  price,
-}: Props) => {
-  const likeOrDeslike = (data: any) => {
-    console.log(data);
-  };
-  return (
-    <Father>
-      <Link to={`/${search}/${id}`}>
-        <Card>
-          {promo ? (
-            <Favor
-              onClick={() =>
-                likeOrDeslike({
-                  type: search,
-                  id,
-                  name: promo,
-                  thumb: image,
-                  like: liked,
-                })
-              }
-            >
-              <AiFillStar size={24} />
-            </Favor>
-          ) : null}
 
-          <Img src={image} alt="none" />
-          <span />
-          <Content>
-            <p>{description}</p>
-            <h1>{promo}</h1>
-            <p>por {price} R$</p>
-          </Content>
-        </Card>
-      </Link>
-    </Father>
-  );
-};
+  installments,
+  price,
+}: Props) => (
+  <Father>
+    <Link to={`/${search}/${id}`}>
+      <Card>
+        {promo ? <Ico src={image} /> : null}
+
+        <Img src={image} alt="none" />
+        <span />
+        <Content>
+          <p>{description}</p>
+          <p>{promo ? `de ${oldPrice} R$` : null}</p>
+          <h1>por {price} R$</h1>
+          {installments.map((i: any) => (
+            <p>{i ? `ou ${i.quantity}x de ${i.value / 100} R$` : null}</p>
+          ))}
+          <BtnFather>
+            <button type="button">COMPRAR</button>
+          </BtnFather>
+        </Content>
+      </Card>
+    </Link>
+  </Father>
+);
 export default CardComicsChar;
