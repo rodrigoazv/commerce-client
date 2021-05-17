@@ -11,6 +11,7 @@ export default createGlobalStyle`
         font-size: 14px;
         color: #333;
         font-family: 'Open Sans Condensed', sans-serif;
+        overflow-x: hidden;
     }
     a{
         cursor: pointer;

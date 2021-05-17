@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import styled from "styled-components";
 import React, { ReactChild } from "react";
-import { ContainerLayout } from "../Common/Container";
+import Footer from "./Footer";
 
 import NavBar from "./NavBar";
 
@@ -24,9 +24,10 @@ const Main = styled.main`
 const HomePage: React.FC<Props> = ({ children }: Props) => (
   <>
     <NavBar />
-    <ContainerLayout>
-      <Main>{children}</Main>
-    </ContainerLayout>
+
+    <Main>{children}</Main>
+
+    <Footer />
   </>
 );
 export default HomePage;

@@ -1,59 +1,38 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../../styles/assets/logo.svg";
-import { ContainerLayout } from "../Common/Container";
-/*
-  Componentes style
-*/
-interface PropsStyles {
-  size?: number;
-}
+// import { Content } from "./styles";
 
-export const NavBar = styled.header`
-  height: 80px;
-  width: 100%;
+export const ContainerLayout = styled.div`
+  position: absolute;
+  left: 0;
+  width: ${(p) => p.theme.screen.xl};
+  width: 100vw;
   color: #333;
-  background-color: ${(p) => p.theme.colors.black};
-  align-items: center;
-`;
-
-const GroupAvatar = styled.div`
-  height: auto;
-  color: ${(p) => p.theme.colors.white};
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-`;
-
-const GroupMessage = styled.div`
-  height: auto;
-  color: ${(p) => p.theme.colors.white};
-  margin: 30px 0;
+  flex-direction: row;
+  margin: 0 auto;
+  height: 100px;
   @media (max-width: 1000px) {
-    display: none;
+    width: 100vw;
   }
 `;
 
-const Logos = styled.img<PropsStyles>`
-  align-item: center;
-  margin: 8px 0;
-  height: ${(p) => (p.size ? `${p.size}px` : "64px")};
+export const ImageBanner = styled.div`
+  height: 300px;
+  width: 100%;
+  background: #333;
 `;
-/*
-  MAIN
-  @TEX
-*/
-const NavBarC: React.FC = () => (
-  <NavBar>
-    <ContainerLayout>
-      <GroupAvatar />
 
-      <Link to="/home">
-        <Logos src={Logo} />
-      </Link>
+const Login: React.FC = () => {
+  console.log("Oi");
+  return (
+    <ContainerLayout>
+      <ImageBanner>
+        <h2> Single Item</h2>
+      </ImageBanner>
     </ContainerLayout>
-  </NavBar>
-);
-export default NavBarC;
+  );
+};
+
+export default Login;

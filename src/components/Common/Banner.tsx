@@ -4,18 +4,15 @@ import Slider from "react-slick";
 import styled from "styled-components";
 // import { Content } from "./styles";
 
+export const Container = styled.div`
+  width: 100%;
+`;
+
 export const ContainerLayout = styled.div`
-  position: absolute;
-  left: 0;
-  width: ${(p) => p.theme.screen.xl};
-  width: 100vw;
-  color: #333;
-  justify-content: space-between;
-  flex-direction: row;
+  box-sizing: border-box;
+  height: 300px;
   margin: 0 auto;
-  @media (max-width: 1000px) {
-    width: 100vw;
-  }
+  width: 100%;
 `;
 
 export const ImageBanner = styled.div`
@@ -43,15 +40,17 @@ const Login: React.FC = () => {
     ),
   };
   return (
-    <ContainerLayout>
-      <h2> Single Item</h2>
-      <Slider {...settings}>
-        <ImageBanner />
-        <ImageBanner />
-        <ImageBanner />
-        <ImageBanner />
-      </Slider>
-    </ContainerLayout>
+    <Container>
+      <ContainerLayout>
+        <h2> Single Item</h2>
+        <Slider {...settings}>
+          <ImageBanner />
+          <ImageBanner />
+          <ImageBanner />
+          <ImageBanner />
+        </Slider>
+      </ContainerLayout>
+    </Container>
   );
 };
 
