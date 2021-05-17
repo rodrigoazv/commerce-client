@@ -1,0 +1,17 @@
+import styled from "styled-components";
+
+export const ContainerLayout = styled.div`
+  width: ${(p) => p.theme.screen.xl};
+  height: auto;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0 auto;
+  @media (max-width: 1400px) {
+    width: ${(p) => p.theme.screen.md};
+  }
+  @media (max-width: 1000px) {
+    width: 100vw;
+  }
+`;

@@ -10,7 +10,7 @@ interface RouteDataItem {
 
 export const routes: RouteDataItem[] = [
   {
-    path: "/main",
+    path: "/",
     name: "home",
     isProtected: false,
     component: Main,
