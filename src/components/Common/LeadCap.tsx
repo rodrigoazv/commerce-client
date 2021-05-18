@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
+import axios from "axios";
 import { ContainerLayout } from "../Common/Container";
 // import { Content } from "./styles";
 
@@ -47,7 +48,8 @@ export const Button = styled.button`
   border-radius: 4px;
   border: none;
   @media (max-width: 1400px) {
-    padding: 12px 130px;
+    padding: 12px 100px;
+    text-align: center;
     width: 100%;
   }
 `;
@@ -70,13 +72,20 @@ const loginSchema = yup.object().shape({
     .string()
     .email("Preencha com um e-mail válido")
     .required("Informe um email"),
-  nome: yup.string().required("Preencha com seu nome completo"),
+  name: yup.string().required("Preencha com seu nome completo"),
 });
 
 const Login: React.FC = () => {
-  const initialValues: any = { email: "", nome: "" };
-  const sendLead = (values: any) => {
-    console.log(values);
+  const initialValues: any = { email: "", name: "" };
+  const [status, setStatus] = useState(false);
+  const sendLead = async (values: any) => {
+    const resp: any = await axios.post(
+      `https://corebiz-test.herokuapp.com/api/v1/newsletter`,
+      values,
+    );
+    if (resp.data.message) {
+      setStatus(true);
+    }
   };
   return (
     <Container>
@@ -88,42 +97,62 @@ const Login: React.FC = () => {
         >
           {({ handleSubmit, handleChange, values, errors, touched }) => (
             <FormBanner onSubmit={handleSubmit}>
-              <h2> Participe de nossas news com promoções e novidades!</h2>
-              <Forms>
-                <InputStyle>
-                  <TextField
-                    name="nome"
-                    placeholder="Nome"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    value={values.nome}
-                    error={touched.nome && Boolean(errors.nome)}
-                    onChange={handleChange}
-                  />
-                  <span>
-                    <ErrorMessage name="nome" />
-                  </span>
-                </InputStyle>
-                <InputStyle>
-                  <TextField
-                    name="email"
-                    placeholder="Email"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    onChange={handleChange}
-                    value={values.email}
-                    error={touched.email && Boolean(errors.email)}
-                  />
-                  <span>
-                    <ErrorMessage name="email" />
-                  </span>
-                </InputStyle>
-                <InputStyle>
-                  <Button type="submit">Eu Quero !</Button>
-                </InputStyle>
-              </Forms>
+              {status ? (
+                <>
+                  <h2>
+                    {" "}
+                    <b>Seu e-mail foi cadastrado com sucesso!</b>
+                  </h2>
+                  <p>
+                    A partir de agora você receberá as novidade e ofertas
+                    exclusivas.
+                  </p>
+                  <InputStyle>
+                    <Button onClick={() => setStatus(false)}>
+                      Cadastrar novo email !
+                    </Button>
+                  </InputStyle>
+                </>
+              ) : (
+                <>
+                  <h2> Participe de nossas news com promoções e novidades!</h2>
+                  <Forms>
+                    <InputStyle>
+                      <TextField
+                        name="name"
+                        placeholder="Nome"
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        value={values.name}
+                        error={touched.name && Boolean(errors.name)}
+                        onChange={handleChange}
+                      />
+                      <span>
+                        <ErrorMessage name="name" />
+                      </span>
+                    </InputStyle>
+                    <InputStyle>
+                      <TextField
+                        name="email"
+                        placeholder="Email"
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        onChange={handleChange}
+                        value={values.email}
+                        error={touched.email && Boolean(errors.email)}
+                      />
+                      <span>
+                        <ErrorMessage name="email" />
+                      </span>
+                    </InputStyle>
+                    <InputStyle>
+                      <Button type="submit">Eu Quero !</Button>
+                    </InputStyle>
+                  </Forms>
+                </>
+              )}
             </FormBanner>
           )}
         </Formik>

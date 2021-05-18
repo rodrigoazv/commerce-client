@@ -69,11 +69,13 @@ const HomePage: React.FC = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          arrows: false,
         },
       },
       {
         breakpoint: 580,
         settings: {
+          arrows: false,
           slidesToShow: 2,
           slidesToScroll: 2,
         },
@@ -85,7 +87,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const getElements = async () => {
       const resp: any = await axios.get(
-        `https://corebiz-test.herokuapp.com/api/v1/products`
+        `https://corebiz-test.herokuapp.com/api/v1/products`,
       );
       setProduct(resp.data);
     };
@@ -95,6 +97,7 @@ const HomePage: React.FC = () => {
     <>
       <ContainerLayout>
         <Main>
+          <h2>Mais vendidos</h2>
           <Slider {...settings}>
             {product.map((p: any) => (
               <Card

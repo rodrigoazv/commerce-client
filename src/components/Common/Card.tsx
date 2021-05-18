@@ -33,7 +33,7 @@ const Card = styled.div`
 `;
 const Img = styled.img`
   z-index: 10;
-  height: 300px;
+  height: 200px;
   width: 280px;
   overflow: hidden;
   object-fit: cover;
@@ -42,12 +42,6 @@ const Img = styled.img`
     height: 150px;
     width: 140px;
   }
-`;
-
-const Ico = styled.img`
-  position: relative;
-  width: 10px;
-  height: 10px;
 `;
 
 const Content = styled.div`
@@ -112,6 +106,23 @@ const BtnFather = styled.div`
   height: 30px;
 `;
 
+const Promo = styled.div`
+  width: 0;
+  height: 0;
+  margin-left: 80%;
+  border-top: 70px solid #f8475f;
+  border-bottom: 0px solid #f8475f;
+  border-left: 70px solid transparent;
+`;
+const PromoNone = styled.div`
+  width: 0;
+  height: 0;
+  margin-left: 80%;
+  border-top: 70px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-left: 70px solid transparent;
+`;
+
 /*
   Componentes props
 */
@@ -151,7 +162,7 @@ const CardComicsChar: React.FC<Props> = ({
     <Father>
       <Card>
         <Link to={`/${search}/${id}`}>
-          {promo ? <Ico src={image} /> : null}
+          {promo ? <Promo /> : <PromoNone />}
 
           <Img src={image} alt="none" />
           <span />

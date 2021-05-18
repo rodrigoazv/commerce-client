@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import Slider from "react-slick";
@@ -30,19 +31,20 @@ const Login: React.FC = () => {
     appendDots: (dots: any) => (
       <div
         style={{
-          backgroundColor: "#ddd",
-          borderRadius: "10px",
+          backgroundColor: "transparent",
           padding: "10px",
+          marginTop: "-50px",
+          position: "absolute",
+          color: "red",
         }}
       >
-        <ul style={{ margin: "0px" }}> {dots} </ul>
+        <ul style={{ marginTop: "-50px" }}> {dots} </ul>
       </div>
     ),
   };
   return (
     <Container>
       <ContainerLayout>
-        <h2> Single Item</h2>
         <Slider {...settings}>
           <ImageBanner />
           <ImageBanner />
