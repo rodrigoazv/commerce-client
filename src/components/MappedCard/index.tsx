@@ -77,7 +77,7 @@ const HomePage: React.FC = () => {
                 price={p.price / 100}
                 image={p.imageUrl}
                 description={p.productName}
-                id="1"
+                id={p.productId}
                 search="roupa"
                 installments={p.installments}
               />

@@ -2,9 +2,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { TextField } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import Logo from "../../styles/assets/logo.svg";
+import { ApplicationState } from "../../store";
 import Cart from "../../styles/assets/cart.svg";
 import { ContainerLayout } from "../Common/Container";
+
 /*
   Componentes style
 */
@@ -26,6 +30,7 @@ const GroupSearch = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 500px;
 `;
 
 const GroupActions = styled.div`
@@ -67,34 +72,44 @@ const Counter = styled.div<PropsStyles>`
   margin: auto 10px;
   border-radius: 50%;
   display: inline-block;
-  height: ${(p) => (p.size ? `${p.size}px` : "16px")};
-  width: ${(p) => (p.size ? `${p.size}px` : "16px")};
+  height: ${(p) => (p.size ? `${p.size}px` : "22px")};
+  width: ${(p) => (p.size ? `${p.size}px` : "22px")};
+  padding: 3px 0 3px 7px;
+  color: #fff;
   background-color: #f8475f;
 `;
 /*
   MAIN
   @TEX
 */
-const NavBarC: React.FC = () => (
-  <NavBar>
-    <ContainerLayout>
-      <Link to="/home">
-        <Logos src={Logo} />
-      </Link>
-      <GroupSearch>
-        <input />
-      </GroupSearch>
-      <GroupActions>
-        <Actions>
-          <Ico src={Cart} />
-          <p>Minha conta</p>
-        </Actions>
-        <Actions>
-          <Ico src={Cart} />
-          <Counter />
-        </Actions>
-      </GroupActions>
-    </ContainerLayout>
-  </NavBar>
-);
+const NavBarC: React.FC = () => {
+  const { cart } = useSelector((state: ApplicationState) => state.cart);
+  return (
+    <NavBar>
+      <ContainerLayout>
+        <Link to="/home">
+          <Logos src={Logo} />
+        </Link>
+        <GroupSearch>
+          <TextField
+            fullWidth
+            name="nome"
+            placeholder="O que está procurando?"
+            size="small"
+          />
+        </GroupSearch>
+        <GroupActions>
+          <Actions>
+            <Ico src={Cart} />
+            <p>Minha conta</p>
+          </Actions>
+          <Actions>
+            <Ico src={Cart} />
+            <Counter>{cart}</Counter>
+          </Actions>
+        </GroupActions>
+      </ContainerLayout>
+    </NavBar>
+  );
+};
 export default NavBarC;

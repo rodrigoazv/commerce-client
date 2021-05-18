@@ -2,6 +2,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
+import { addCart } from "../../store/ducks/product/actions";
 
 const Father = styled.div`
   a {
@@ -104,6 +107,7 @@ interface Props {
   MAIN
   @TEX
 */
+
 const CardComicsChar: React.FC<Props> = ({
   promo,
   image,
@@ -114,14 +118,21 @@ const CardComicsChar: React.FC<Props> = ({
 
   installments,
   price,
-}: Props) => (
-  <Father>
-    <Link to={`/${search}/${id}`}>
-      <Card>
-        {promo ? <Ico src={image} /> : null}
+}: Props) => {
+  const dispatch = useDispatch();
 
-        <Img src={image} alt="none" />
-        <span />
+  const addToCart = () => {
+    dispatch(addCart());
+  };
+  return (
+    <Father>
+      <Card>
+        <Link to={`/${search}/${id}`}>
+          {promo ? <Ico src={image} /> : null}
+
+          <Img src={image} alt="none" />
+          <span />
+        </Link>
         <Content>
           <p>{description}</p>
           <p>{promo ? `de ${oldPrice} R$` : null}</p>
@@ -129,12 +140,16 @@ const CardComicsChar: React.FC<Props> = ({
           {installments.map((i: any) => (
             <p>{i ? `ou ${i.quantity}x de ${i.value / 100} R$` : null}</p>
           ))}
+
           <BtnFather>
-            <button type="button">COMPRAR</button>
+            <button type="button" onClick={() => addToCart()}>
+              COMPRAR
+            </button>
           </BtnFather>
         </Content>
       </Card>
-    </Link>
-  </Father>
-);
+    </Father>
+  );
+};
+
 export default CardComicsChar;
