@@ -18,21 +18,28 @@ export const ContainerLayout = styled.div`
   flex-direction: row;
   margin: 0 auto;
   @media (max-width: 1000px) {
-    width: 100vw;
+    height: auto;
   }
 `;
 
 export const ImageBanner = styled.div`
   width: 50%;
   margin: 0 auto;
+  @media (max-width: 1000px) {
+    margin: 0 30px;
+  }
 `;
 
 export const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 50px 0;
+  flex-wrap: wrap;
   p {
-    width: 200px;
+    width: 33%;
+  }
+  @media (max-width: 1000px) {
+    flex-direction: column;
   }
 `;
 

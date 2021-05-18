@@ -110,9 +110,9 @@ const Promo = styled.div`
   width: 0;
   height: 0;
   margin-left: 80%;
-  border-top: 70px solid #f8475f;
+  border-top: 40px solid #f8475f;
   border-bottom: 0px solid #f8475f;
-  border-left: 70px solid transparent;
+  border-left: 40px solid transparent;
 `;
 const PromoNone = styled.div`
   width: 0;
