@@ -15,7 +15,7 @@ const Father = styled.div`
 const Card = styled.div`
   text-decoration: none;
   z-index: 5;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px 20px;
   background: ${(p) => p.theme.colors.white};
   color: ${(p) => p.theme.colors.black};
   height: 450px;
@@ -26,6 +26,10 @@ const Card = styled.div`
     width: 100px;
     height: 1px;
   }
+  @media (max-width: 1400px) {
+    height: 350px;
+    width: 140px;
+  }
 `;
 const Img = styled.img`
   z-index: 10;
@@ -34,6 +38,10 @@ const Img = styled.img`
   overflow: hidden;
   object-fit: cover;
   border-radius: 8px;
+  @media (max-width: 1400px) {
+    height: 150px;
+    width: 140px;
+  }
 `;
 
 const Ico = styled.img`
@@ -49,8 +57,23 @@ const Content = styled.div`
   padding: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  height: 100%;
+  justify-content: space-between;
   align-items: center;
+  button {
+    display: none;
+  }
+  @media (max-width: 1400px) {
+    width: 140px;
+    button {
+      display: flex;
+      background: #333;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 4px;
+      border: none;
+    }
+  }
   h1 {
     font-size: 20px;
     align-items: center;
@@ -58,6 +81,9 @@ const Content = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    @media (max-width: 1400px) {
+      font-size: 15px;
+    }
   }
   p {
     font-size: 15px;
@@ -67,9 +93,6 @@ const Content = styled.div`
     overflow: hidden;
   }
   transition: 0.3s;
-  button {
-    display: none;
-  }
   &: hover {
     background: #e6e8ea;
     cursor: pointer;

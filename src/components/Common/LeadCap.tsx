@@ -20,6 +20,10 @@ export const FormBanner = styled.form`
   margin: 20px auto;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 1400px) {
+    margin: 10px 15px;
+    height: 346px;
+  }
 `;
 
 export const Forms = styled.div`
@@ -28,6 +32,11 @@ export const Forms = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   align-items: center;
+  @media (max-width: 1400px) {
+    width: 100%;
+    flex-direction: column;
+    height: 200px;
+  }
 `;
 
 export const Button = styled.button`
@@ -37,6 +46,10 @@ export const Button = styled.button`
   padding: 12px 30px;
   border-radius: 4px;
   border: none;
+  @media (max-width: 1400px) {
+    padding: 12px 130px;
+    width: 100%;
+  }
 `;
 
 export const InputStyle = styled.div`
@@ -45,6 +58,11 @@ export const InputStyle = styled.div`
   flex-direction: column;
   color: red;
   height: 50px;
+  @media (max-width: 1400px) {
+    margin: 10px 5px;
+    width: 100%;
+    height: 35px;
+  }
 `;
 
 const loginSchema = yup.object().shape({
@@ -78,6 +96,7 @@ const Login: React.FC = () => {
                     placeholder="Nome"
                     variant="outlined"
                     size="small"
+                    fullWidth
                     value={values.nome}
                     error={touched.nome && Boolean(errors.nome)}
                     onChange={handleChange}
@@ -92,6 +111,7 @@ const Login: React.FC = () => {
                     placeholder="Email"
                     variant="outlined"
                     size="small"
+                    fullWidth
                     onChange={handleChange}
                     value={values.email}
                     error={touched.email && Boolean(errors.email)}

@@ -53,6 +53,32 @@ const HomePage: React.FC = () => {
         <ul style={{ margin: "0px" }}> {dots} </ul>
       </div>
     ),
+    responsive: [
+      {
+        breakpoint: 1124,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 580,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+    ],
   };
 
   const [product, setProduct] = useState([]);
